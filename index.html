@@ -2,378 +2,211 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>StudyZen V1.1</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-    background:#f4f7ff;
-    color:#222;
-    transition:.3s;
+ margin:0;font-family:Arial,sans-serif;
+ background:#f4f7ff;color:#202124;
+ transition:.3s
 }
-
 header{
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
-    color:white;
-    text-align:center;
-    padding:32px 20px;
+ background:linear-gradient(135deg,#4f46e5,#7c3aed);
+ color:white;text-align:center;padding:32px 15px
 }
-
-header h1{
-    font-size:40px;
-}
-
-header p{
-    margin-top:8px;
-}
-
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-}
-
+header h1{font-size:42px;margin:0}
+header p{margin:8px}
+.container{max-width:1100px;margin:auto;padding:18px}
 .card{
-    background:white;
-    padding:24px;
-    margin:18px 0;
-    border-radius:18px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+ background:white;padding:22px;margin:18px 0;
+ border-radius:18px;box-shadow:0 5px 20px #0001
 }
-
-.quote{
-    text-align:center;
-    font-weight:bold;
-    font-size:18px;
-    margin:15px 0;
-}
-
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px
 }
-
 .item{
-    background:#eef2ff;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
+ background:#eef2ff;padding:20px;
+ border-radius:15px;text-align:center
 }
-
-.item p{
-    color:#666;
-    margin-top:7px;
-}
-
+.item p{color:#666}
 button{
-    border:0;
-    padding:11px 16px;
-    border-radius:10px;
-    background:#4f46e5;
-    color:white;
-    cursor:pointer;
-    margin-top:12px;
+ background:#4f46e5;color:white;border:0;
+ border-radius:10px;padding:11px 16px;
+ margin:6px 3px;cursor:pointer
 }
-
-button:hover{
-    background:#3730a3;
-}
-
-.back{
-    background:#555;
-    margin-bottom:15px;
-}
-
+button:hover{background:#3730a3}
+.back{background:#555}
+.hidden{display:none}
 select,input,textarea{
-    width:100%;
-    padding:13px;
-    margin-top:10px;
-    border:2px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
+ width:100%;padding:13px;margin:10px 0;
+ border:2px solid #ddd;border-radius:10px;
+ font-size:16px
 }
-
-textarea{
-    min-height:220px;
-    resize:vertical;
-}
-
-.hidden{
-    display:none;
-}
-
 .chapter{
-    background:#f3f5ff;
-    padding:16px;
-    border-radius:11px;
-    margin:9px 0;
+ background:#f1f3ff;padding:17px;
+ border-radius:12px;margin:10px 0
 }
-
-.tool{
-    background:#f5f3ff;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
+.reader{
+ line-height:1.85;
+ min-height:390px;
+ font-size:17px
 }
-
-.progress{
-    height:18px;
-    background:#ddd;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:12px;
+.reader h2{margin-bottom:15px}
+.reader li{margin:9px}
+.pageNo{
+ text-align:center;
+ background:#e0e7ff;
+ padding:10px;border-radius:10px;
+ margin-top:15px
 }
-
-.bar{
-    height:100%;
-    width:0%;
-    background:#4f46e5;
+.quote{
+ text-align:center;font-weight:bold;
+ font-size:18px;margin:15px
 }
-
-.result{
-    margin-top:12px;
-    font-weight:bold;
+.dark{background:#15151d;color:#eee}
+.dark .card{background:#22232d}
+.dark .item,.dark .chapter{background:#30313d}
+.dark input,.dark textarea,.dark select{
+ background:#22232d;color:white;border-color:#555
 }
-
-.dark{
-    background:#15151d;
-    color:#eee;
-}
-
-.dark .card{
-    background:#22232d;
-}
-
-.dark .item,
-.dark .chapter,
-.dark .tool{
-    background:#30313d;
-}
-
-.dark input,
-.dark textarea,
-.dark select{
-    background:#22232d;
-    color:white;
-    border-color:#555;
-}
-
-.dark .item p{
-    color:#bbb;
-}
-
-footer{
-    text-align:center;
-    padding:25px;
-    color:#777;
-}
-
-@media(max-width:600px){
-    header h1{
-        font-size:32px;
-    }
-
-    .container{
-        padding:12px;
-    }
-}
+.dark .item p{color:#bbb}
+footer{text-align:center;padding:25px;color:#777}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>📚 StudyZen</h1>
-    <p>Learn • Practice • Improve 🚀</p>
+<h1>📚 StudyZen</h1>
+<p>Learn • Practice • Revise • Grow 🚀</p>
 </header>
 
 <div class="container">
 
 <!-- BOARD -->
+<div class="card" id="boardBox">
+<h2>🎓 Choose Your Board</h2>
+<p class="quote">“Your future is built one lesson at a time.” 🌟</p>
 
-<div class="card" id="boardSection">
+<div class="grid">
 
-    <h2>🎓 Choose Your Board</h2>
+<div class="item">
+<h3>🇮🇳 CBSE</h3>
+<p>Central Board</p>
+<button onclick="setBoard('CBSE')">Choose</button>
+</div>
 
-    <p class="quote">
-        “Choose your path. Build your future.” 🌟
-    </p>
+<div class="item">
+<h3>🏫 ICSE</h3>
+<p>School curriculum</p>
+<button onclick="setBoard('ICSE')">Choose</button>
+</div>
 
-    <div class="grid">
+<div class="item">
+<h3>📚 State Board</h3>
+<p>State curriculum</p>
+<button onclick="setBoard('State Board')">Choose</button>
+</div>
 
-        <div class="item">
-            <h3>🇮🇳 CBSE</h3>
-            <p>Central Board of Secondary Education</p>
-            <button onclick="selectBoard('CBSE')">
-                Choose
-            </button>
-        </div>
+</div>
 
-        <div class="item">
-            <h3>🏫 ICSE</h3>
-            <p>Indian Certificate of Secondary Education</p>
-            <button onclick="selectBoard('ICSE')">
-                Choose
-            </button>
-        </div>
-
-        <div class="item">
-            <h3>📚 State Board</h3>
-            <p>State curriculum</p>
-            <button onclick="selectBoard('State Board')">
-                Choose
-            </button>
-        </div>
-
-    </div>
-
-    <p id="boardMessage" class="result"></p>
-
+<p id="boardMsg"></p>
 </div>
 
 
 <!-- CLASS -->
+<div class="card hidden" id="classBox">
+<h2>🎒 Choose Class</h2>
 
-<div class="card hidden" id="classSection">
+<select id="classSelect">
+<option value="">Select Class</option>
+<option>1</option><option>2</option>
+<option>3</option><option>4</option>
+<option>5</option><option>6</option>
+<option>7</option><option>8</option>
+<option>9</option><option>10</option>
+<option>11</option><option>12</option>
+</select>
 
-    <h2>🎓 Choose Your Class</h2>
-
-    <p class="quote">
-        “Every great journey starts with one decision.” 🚀
-    </p>
-
-    <select id="classSelect">
-
-        <option value="">-- Select Class --</option>
-
-        <option value="1">Class 1</option>
-        <option value="2">Class 2</option>
-        <option value="3">Class 3</option>
-        <option value="4">Class 4</option>
-        <option value="5">Class 5</option>
-        <option value="6">Class 6</option>
-        <option value="7">Class 7</option>
-        <option value="8">Class 8</option>
-        <option value="9">Class 9</option>
-        <option value="10">Class 10</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
-
-    </select>
-
-    <p id="classMessage" class="result"></p>
-
+<p id="classMsg"></p>
 </div>
 
 
 <!-- STREAM -->
+<div class="card hidden" id="streamBox">
+<h2>🎯 Choose Stream</h2>
 
-<div class="card hidden" id="streamSection">
+<div class="grid">
 
-    <h2>🎯 Choose Your Stream</h2>
+<div class="item">
+<h3>🔬 Science</h3>
+<button onclick="setStream('Science')">Choose</button>
+</div>
 
-    <p class="quote">
-        “Your interests can become your future.” 🌟
-    </p>
+<div class="item">
+<h3>💰 Commerce</h3>
+<button onclick="setStream('Commerce')">Choose</button>
+</div>
 
-    <div class="grid">
+<div class="item">
+<h3>🌍 Humanities</h3>
+<button onclick="setStream('Humanities')">Choose</button>
+</div>
 
-        <div class="item">
-            <h3>🔬 Science</h3>
-            <button onclick="selectStream('Science')">
-                Choose
-            </button>
-        </div>
-
-        <div class="item">
-            <h3>💰 Commerce</h3>
-            <button onclick="selectStream('Commerce')">
-                Choose
-            </button>
-        </div>
-
-        <div class="item">
-            <h3>🌍 Humanities</h3>
-            <button onclick="selectStream('Humanities')">
-                Choose
-            </button>
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 
 <!-- DASHBOARD -->
-
 <div id="dashboard" class="hidden">
 
-    <div class="card">
+<div class="card">
+<h2>📚 Subjects</h2>
+<p id="info"></p>
+<div id="subjects" class="grid"></div>
+</div>
 
-        <h2>📚 Your Subjects</h2>
+<div class="card">
+<h2>⚡ Study Tools</h2>
 
-        <p id="selectedInfo"></p>
+<div class="grid">
 
-        <br>
+<div class="item">
+<h3>📝 Notes</h3>
+<button onclick="notes()">Open</button>
+</div>
 
-        <div id="subjects" class="grid"></div>
+<div class="item">
+<h3>🧠 Quiz</h3>
+<button onclick="quiz()">Start</button>
+</div>
 
-    </div>
+<div class="item">
+<h3>🎯 Practice</h3>
+<button onclick="practice()">Start</button>
+</div>
 
+<div class="item">
+<h3>📊 Progress</h3>
+<button onclick="progress()">View</button>
+</div>
 
-    <!-- TOOLS -->
+<div class="item">
+<h3>🔍 Search</h3>
+<button onclick="searchPage()">Search</button>
+</div>
 
-    <div class="card">
+<div class="item">
+<h3>🌙 Dark Mode</h3>
+<button onclick="darkMode()">Toggle</button>
+</div>
 
-        <h2>⚡ Study Tools</h2>
-
-        <br>
-
-        <div class="grid">
-
-            <div class="tool">
-                <h3>📝 Notes</h3>
-                <button onclick="showNotes()">Open</button>
-            </div>
-
-            <div class="tool">
-                <h3>🧠 Quiz</h3>
-                <button onclick="startQuiz()">Start</button>
-            </div>
-
-            <div class="tool">
-                <h3>🎯 Practice</h3>
-                <button onclick="practice()">Practice</button>
-            </div>
-
-            <div class="tool">
-                <h3>📊 Progress</h3>
-                <button onclick="showProgress()">View</button>
-            </div>
-
-            <div class="tool">
-                <h3>🔍 Search</h3>
-                <button onclick="searchBox()">Search</button>
-            </div>
-
-            <div class="tool">
-                <h3>🌙 Theme</h3>
-                <button onclick="darkMode()">Toggle</button>
-            </div>
-
-        </div>
-
-    </div>
-
+</div>
+</div>
 </div>
 
 
@@ -381,1011 +214,1045 @@ footer{
 
 </div>
 
-
 <footer>
-StudyZen V1.1 🚀 • Learn Smarter
+StudyZen V1.1 • Original educational content 📚
 </footer>
 
 
 <script>
 
-/* ================= BOARD ================= */
+/* =========================
+   USER SELECTION
+========================= */
 
 let board="";
-
-function selectBoard(value){
-
-    board=value;
-
-    localStorage.setItem(
-        "studyzenBoard",
-        value
-    );
-
-    document.getElementById(
-        "boardMessage"
-    ).innerText=
-        "✅ "+value+" selected!";
-
-    document.getElementById(
-        "classSection"
-    ).classList.remove("hidden");
-}
+let cls="";
+let stream="";
 
 
-/* ================= CLASS SUBJECTS ================= */
+/* =========================
+   SUBJECT MAP
+========================= */
 
-const classSubjects={
+const junior=[
+"English","Mathematics","Hindi","EVS","Computer"
+];
 
-1:["English","Mathematics","Hindi","EVS","Computer"],
+const middle=[
+"English","Mathematics","Science",
+"Social Science","Hindi","Computer"
+];
 
-2:["English","Mathematics","Hindi","EVS","Computer"],
-
-3:["English","Mathematics","Hindi","EVS","Computer"],
-
-4:["English","Mathematics","Hindi","EVS","Computer"],
-
-5:["English","Mathematics","Hindi","EVS","Computer"],
-
-6:["English","Mathematics","Science","Social Science","Hindi","Computer"],
-
-7:["English","Mathematics","Science","Social Science","Hindi","Computer"],
-
-8:["English","Mathematics","Science","Social Science","Hindi","Computer"],
-
-9:[
-"English",
-"Mathematics",
-"Science",
-"Social Science",
-"Hindi",
-"Computer",
+const secondary=[
+"English","Mathematics","Science",
+"Social Science","Hindi","Computer",
 "Artificial Intelligence"
+];
+
+const senior={
+Science:[
+"English","Physics","Chemistry","Mathematics",
+"Biology","Computer Science","Physical Education"
 ],
-
-10:[
-"English",
-"Mathematics",
-"Science",
-"Social Science",
-"Hindi",
-"Computer",
-"Artificial Intelligence"
+Commerce:[
+"English","Accountancy","Business Studies",
+"Economics","Mathematics","Computer Science",
+"Physical Education"
+],
+Humanities:[
+"English","History","Geography",
+"Political Science","Economics",
+"Psychology","Physical Education"
 ]
-
 };
 
 
-/* ================= STREAM SUBJECTS ================= */
+/* =========================
+   CHAPTER MAP
+========================= */
 
-const streams={
+const chapterMap={
+
+English:[
+"Reading Skills","Grammar","Vocabulary",
+"Writing Skills","Literature","Creative Writing"
+],
+
+Mathematics:[
+"Numbers","Arithmetic","Algebra","Geometry",
+"Mensuration","Data Handling","Patterns"
+],
+
+Hindi:[
+"वर्ण और मात्राएँ","शब्द ज्ञान","व्याकरण",
+"पठन कौशल","लेखन कौशल","साहित्य"
+],
+
+EVS:[
+"My Family","My School","Food",
+"Plants","Animals","Water","Environment"
+],
+
+Computer:[
+"Computer Basics","Parts of a Computer",
+"Keyboard and Mouse","Coding Basics",
+"Internet","Cyber Safety"
+],
 
 Science:[
-"English",
-"Physics",
-"Chemistry",
-"Mathematics",
-"Biology",
-"Computer Science",
-"Physical Education"
-],
-
-Commerce:[
-"English",
-"Accountancy",
-"Business Studies",
-"Economics",
-"Mathematics",
-"Computer Science",
-"Physical Education"
-],
-
-Humanities:[
-"English",
-"History",
-"Geography",
-"Political Science",
-"Economics",
-"Psychology",
-"Physical Education"
-]
-
-};
-
-
-/* ================= CHAPTERS ================= */
-
-const chapters={
-
-"English":[
-"Reading",
-"Grammar",
-"Writing Skills",
-"Literature",
-"Vocabulary"
-],
-
-"Mathematics":[
-"Numbers",
-"Algebra",
-"Geometry",
-"Mensuration",
-"Statistics",
-"Probability"
-],
-
-"Hindi":[
-"वर्णमाला",
-"व्याकरण",
-"पठन",
-"लेखन",
-"साहित्य"
-],
-
-"EVS":[
-"Myself",
-"My Family",
-"Food",
-"Plants",
-"Animals",
-"My School"
-],
-
-"Computer":[
-"Computer Basics",
-"Keyboard",
-"Mouse",
-"Internet",
-"Coding",
-"Cyber Safety"
-],
-
-"Science":[
-"Matter",
-"Motion",
-"Force",
-"Heat",
-"Light",
-"Sound",
-"Electricity",
-"Environment"
+"Living Things","Matter","Motion","Force",
+"Heat","Light","Sound","Electricity",
+"Environment","Adolescence"
 ],
 
 "Social Science":[
-"History",
-"Geography",
-"Political Science",
-"Economics",
-"Map Work"
+"History","Geography","Government",
+"Resources","Maps","Society"
 ],
 
 "Artificial Intelligence":[
-"AI Basics",
-"Data",
-"Machine Learning",
-"Computer Vision",
-"Natural Language",
-"AI Ethics"
+"Introduction to AI","Data","Algorithms",
+"Machine Learning","AI Applications","AI Ethics"
 ],
 
-"Physics":[
-"Units and Measurements",
-"Motion",
-"Laws of Motion",
-"Work Energy and Power",
-"Gravitation",
-"Thermodynamics",
-"Waves",
-"Optics"
+Physics:[
+"Units and Measurements","Motion","Force",
+"Work and Energy","Gravitation",
+"Thermodynamics","Waves","Optics","Electricity"
 ],
 
-"Chemistry":[
-"Basic Concepts",
-"Structure of Atom",
-"Chemical Bonding",
-"Thermodynamics",
-"Equilibrium",
-"Organic Chemistry",
-"Electrochemistry"
+Chemistry:[
+"Basic Concepts","Atoms","Periodic Table",
+"Chemical Bonding","Chemical Reactions",
+"Acids and Bases","Organic Chemistry"
 ],
 
-"Biology":[
-"Cell",
-"Biomolecules",
-"Plant Physiology",
-"Human Physiology",
-"Genetics",
-"Evolution",
-"Ecology"
+Biology:[
+"Cell","Tissues","Life Processes",
+"Plant Biology","Human Biology",
+"Genetics","Evolution","Ecology"
 ],
 
 "Computer Science":[
-"Python",
-"Data Types",
-"Conditions",
-"Loops",
-"Functions",
-"Lists",
-"Dictionaries",
-"File Handling",
-"SQL",
-"Networks"
+"Programming Basics","Python","Variables",
+"Conditions","Loops","Functions",
+"Data Structures","SQL","Networks"
 ],
 
-"Accountancy":[
-"Introduction",
-"Journal",
-"Ledger",
-"Trial Balance",
-"Depreciation",
-"Financial Statements",
-"Partnership"
+Accountancy:[
+"Accounting Basics","Journal","Ledger",
+"Trial Balance","Depreciation",
+"Financial Statements","Partnership"
 ],
 
 "Business Studies":[
-"Nature of Business",
-"Forms of Business",
-"Business Services",
-"Management",
-"Marketing",
-"Finance"
+"Business Basics","Forms of Business",
+"Management","Marketing","Finance",
+"Entrepreneurship"
 ],
 
-"Economics":[
-"Introduction",
-"Statistics",
-"Demand",
-"Supply",
-"Production",
-"Markets",
+Economics:[
+"Introduction","Statistics","Demand",
+"Supply","Production","Markets",
 "Money and Banking"
 ],
 
-"History":[
-"Ancient History",
-"Medieval History",
-"Modern History",
-"World History",
-"Indian History"
+History:[
+"Ancient History","Medieval History",
+"Modern History","World History",
+"Culture and Society"
 ],
 
-"Geography":[
-"Physical Geography",
-"Landforms",
-"Climate",
-"Water",
-"Resources",
-"Population"
+Geography:[
+"Earth","Landforms","Climate","Water",
+"Resources","Population","Maps"
 ],
 
 "Political Science":[
-"Constitution",
-"Rights",
-"Political Institutions",
-"Federalism",
-"Democracy",
-"International Relations"
+"Constitution","Democracy","Rights",
+"Government","Federalism",
+"Political Institutions"
 ],
 
-"Psychology":[
-"Introduction",
-"Methods",
-"Development",
-"Learning",
-"Memory",
-"Motivation",
-"Personality"
+Psychology:[
+"Introduction","Methods of Psychology",
+"Development","Learning","Memory",
+"Motivation","Personality"
 ],
 
 "Physical Education":[
-"Fitness",
-"Yoga",
-"Sports",
-"Nutrition",
-"Training",
-"Health"
+"Fitness","Yoga","Sports",
+"Nutrition","Training","Health"
 ]
 
 };
 
 
-/* ================= VARIABLES ================= */
+/* =========================
+   BOARD
+========================= */
 
-let selectedClass="";
-let selectedStream="";
+function setBoard(x){
 
+board=x;
 
-/* ================= CLASS SELECT ================= */
+document.getElementById("boardMsg").innerText=
+"✅ "+x+" selected!";
 
-document.getElementById(
-    "classSelect"
-).addEventListener("change",function(){
+document.getElementById("classBox")
+.classList.remove("hidden");
 
-    selectedClass=this.value;
-
-    document.getElementById(
-        "dashboard"
-    ).classList.add("hidden");
-
-    if(!selectedClass)return;
-
-    document.getElementById(
-        "classMessage"
-    ).innerText=
-        "✅ Class "+selectedClass+" selected!";
-
-    /* STREAM FOR 11 & 12 */
-
-    if(
-        selectedClass==="11" ||
-        selectedClass==="12"
-    ){
-
-        document.getElementById(
-            "streamSection"
-        ).classList.remove("hidden");
-
-        return;
-    }
-
-    document.getElementById(
-        "streamSection"
-    ).classList.add("hidden");
-
-    showDashboard(
-        classSubjects[selectedClass]
-    );
-});
-
-
-/* ================= STREAM ================= */
-
-function selectStream(stream){
-
-    selectedStream=stream;
-
-    localStorage.setItem(
-        "studyzenStream",
-        stream
-    );
-
-    document.getElementById(
-        "streamSection"
-    ).classList.add("hidden");
-
-    showDashboard(
-        streams[stream]
-    );
+localStorage.setItem("board",x);
 }
 
 
-/* ================= DASHBOARD ================= */
+/* =========================
+   CLASS
+========================= */
+
+document.getElementById("classSelect")
+.onchange=function(){
+
+cls=this.value;
+
+if(!cls)return;
+
+document.getElementById("classMsg").innerText=
+"✅ Class "+cls+" selected!";
+
+if(cls==="11"||cls==="12"){
+
+document.getElementById("streamBox")
+.classList.remove("hidden");
+
+document.getElementById("dashboard")
+.classList.add("hidden");
+
+}else{
+
+document.getElementById("streamBox")
+.classList.add("hidden");
+
+let list=
+cls<=5?junior:
+cls<=8?middle:
+secondary;
+
+showDashboard(list);
+
+}
+
+};
+
+
+/* =========================
+   STREAM
+========================= */
+
+function setStream(x){
+
+stream=x;
+
+document.getElementById("streamBox")
+.classList.add("hidden");
+
+showDashboard(senior[x]);
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
 
 function showDashboard(list){
 
-    document.getElementById(
-        "dashboard"
-    ).classList.remove("hidden");
+document.getElementById("dashboard")
+.classList.remove("hidden");
 
-    document.getElementById(
-        "selectedInfo"
-    ).innerText=
-        "🎓 "+board+
-        " • Class "+selectedClass+
-        (selectedStream
-        ? " • "+selectedStream
-        : "");
+document.getElementById("info").innerText=
+board+" • Class "+cls+
+(stream?" • "+stream:"");
 
-    const box=
-        document.getElementById("subjects");
+let box=document.getElementById("subjects");
 
-    box.innerHTML="";
+box.innerHTML="";
 
-    list.forEach(subject=>{
+list.forEach(subject=>{
 
-        box.innerHTML+=`
+let count=
+(chapterMap[subject]||[]).length;
 
-        <div class="item">
+box.innerHTML+=`
 
-            <h3>📘 ${subject}</h3>
+<div class="item">
 
-            <p>
-            ${chapters[subject]
-            ? chapters[subject].length
-            : 5}
-            topics
-            </p>
+<h3>📘 ${subject}</h3>
 
-            <button
-            onclick="openSubject('${subject}')">
-                Open
-            </button>
+<p>${count} chapters</p>
 
-        </div>
+<button onclick="openSubject('${subject}')">
+📚 View Chapters
+</button>
 
-        `;
-    });
+</div>
+
+`;
+
+});
+
 }
 
 
-/* ================= SUBJECT ================= */
+/* =========================
+   CHAPTERS
+========================= */
 
 function openSubject(subject){
 
-    const list=
-        chapters[subject] || [
-            "Introduction",
-            "Topic 1",
-            "Topic 2",
-            "Topic 3",
-            "Revision"
-        ];
+let chapters=
+chapterMap[subject]||[
+"Introduction","Core Concepts",
+"Examples","Applications",
+"Practice","Revision"
+];
 
-    let html=`
+let html=`
 
-    <div class="card">
+<div class="card">
 
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
+<button class="back"
+onclick="closeContent()">← Subjects</button>
 
-        <h2>📖 ${subject}</h2>
+<h2>📘 ${subject}</h2>
 
-        <p>
-        Class ${selectedClass}
-        </p>
+<p>${board} • Class ${cls}
+${stream?" • "+stream:""}</p>
 
-        <br>
+<hr>
 
-        <h3>📚 Topics</h3>
-    `;
+<h3>📚 Chapters</h3>
+`;
 
-    list.forEach((chapter,index)=>{
+chapters.forEach((chapter,i)=>{
 
-        html+=`
+html+=`
 
-        <div class="chapter">
+<div class="chapter">
 
-            <b>
-            ${index+1}. ${chapter}
-            </b>
+<b>Chapter ${i+1}: ${chapter}</b>
 
-            <br>
+<br>
 
-            <button
-            onclick="openLesson('${subject}','${chapter}')">
-                📖 Learn
-            </button>
+<button
+onclick="openChapter('${subject}','${chapter}')">
+📖 Read 6 Pages
+</button>
 
-            <button
-            onclick="startQuiz()">
-                🧠 Quiz
-            </button>
+<button
+onclick="quiz('${subject}','${chapter}')">
+🧠 Quiz
+</button>
 
-        </div>
+</div>
 
-        `;
-    });
+`;
 
-    html+=`</div>`;
+});
 
-    document.getElementById(
-        "content"
-    ).innerHTML=html;
+html+=`</div>`;
 
-    window.scrollTo({
-        top:document.getElementById(
-            "content"
-        ).offsetTop,
-        behavior:"smooth"
-    });
+document.getElementById("content").innerHTML=html;
+
+scrollToContent();
+
 }
 
 
-/* ================= LESSON ================= */
+/* =========================
+   ORIGINAL 6-PAGE ENGINE
+========================= */
 
-function openLesson(subject,chapter){
+function makePages(subject,chapter){
 
-    document.getElementById(
-        "content"
-    ).innerHTML=`
+return [
 
-    <div class="card">
+{
+title:"🌱 Introduction",
+body:`
+<p><b>${chapter}</b> is an important part of learning
+${subject}. In this lesson we will understand the topic
+step by step instead of simply memorising facts.</p>
 
-        <button class="back"
-        onclick="openSubject('${subject}')">
-        ← Back
-        </button>
+<p>The first step in learning is to understand what the
+topic means and why it is useful.</p>
 
-        <h2>📖 ${chapter}</h2>
+<div class="pagebox">
+⭐ Study Tip: Read slowly and explain the idea in your
+own words after finishing the page.
+</div>
+`
+},
 
-        <p>
-        ${subject} • Class ${selectedClass}
-        </p>
+{
+title:"🔎 Understanding the Concept",
+body:`
+<p>Every topic has a central idea. Once that idea becomes
+clear, smaller facts become much easier to remember.</p>
 
-        <br>
+<p>While studying <b>${chapter}</b>, look for important
+terms, relationships, examples and real-life connections.</p>
 
-        <h3>📝 Study Guide</h3>
+<ul>
+<li>Identify the main idea.</li>
+<li>Learn important vocabulary.</li>
+<li>Connect new information with previous knowledge.</li>
+<li>Ask “why?” and “how?” while learning.</li>
+</ul>
+`
+},
 
-        <p style="
-        margin-top:12px;
-        line-height:1.7">
+{
+title:"💡 Examples and Applications",
+body:`
+<p>Examples help turn an abstract idea into something
+easier to understand. Try connecting <b>${chapter}</b>
+with situations you already know.</p>
 
-        Welcome to your StudyZen lesson.
+<p>For example, after learning a new concept, think of
+one situation at home, at school and in the world around
+you where the idea could be useful.</p>
 
-        Study <b>${chapter}</b>,
-        understand the main ideas,
-        make short notes and practise
-        questions after learning.
+<div class="pagebox">
+💡 Learning becomes stronger when you can explain a
+concept and give your own example.
+</div>
+`
+},
 
-        </p>
+{
+title:"🧠 Think and Learn",
+body:`
+<p>Good learners do more than read. They compare ideas,
+ask questions and check whether they really understand
+the concept.</p>
 
-        <br>
+<h3>Try this:</h3>
 
-        <h3>🎯 Mission</h3>
+<ul>
+<li>Explain the topic without looking at your notes.</li>
+<li>Write three important points.</li>
+<li>Write two questions about the topic.</li>
+<li>Teach the idea to an imaginary student.</li>
+</ul>
 
-        <ul style="
-        margin:12px 0 0 22px;
-        line-height:1.8">
+<p>If you can explain something simply, your understanding
+is becoming stronger.</p>
+`
+},
 
-            <li>📖 Read</li>
-            <li>🧠 Understand</li>
-            <li>✏️ Make notes</li>
-            <li>🎯 Practise</li>
-            <li>🧠 Take a quiz</li>
+{
+title:"✏️ Practice and Revision",
+body:`
+<p>Revision should be active. Instead of reading the same
+paragraph repeatedly, close your book and recall the
+important ideas.</p>
 
-        </ul>
+<ul>
+<li>Make a short summary.</li>
+<li>Practise important questions.</li>
+<li>Review difficult words.</li>
+<li>Correct mistakes.</li>
+<li>Revise again after some time.</li>
+</ul>
 
-        <br>
+<div class="pagebox">
+🎯 Goal: Understand first, remember second.
+</div>
+`
+},
 
-        <button onclick="startQuiz()">
-            🧠 Take Quiz
-        </button>
+{
+title:"🏆 Quick Revision",
+body:`
+<h3>Remember</h3>
 
-        <button onclick="practice()">
-            🎯 Practice
-        </button>
+<ul>
+<li>${chapter} belongs to ${subject}.</li>
+<li>Start with the central idea.</li>
+<li>Use examples to understand concepts.</li>
+<li>Ask questions while studying.</li>
+<li>Practise and revise regularly.</li>
+</ul>
 
-    </div>
-    `;
+<h3>🎯 Self Check</h3>
+
+<p>1. What is the main idea of this topic?</p>
+<p>2. Which terms should you remember?</p>
+<p>3. Can you give your own example?</p>
+<p>4. Can you explain the topic without notes?</p>
+
+<div class="pagebox">
+🎉 You completed all 6 StudyZen pages!
+</div>
+`
 }
-
-
-/* ================= NOTES ================= */
-
-function showNotes(){
-
-    document.getElementById(
-        "content"
-    ).innerHTML=`
-
-    <div class="card">
-
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
-
-        <h2>📝 My Notes</h2>
-
-        <textarea
-        id="notes"
-        placeholder="Write your notes here...">
-        </textarea>
-
-        <button onclick="saveNotes()">
-            💾 Save Notes
-        </button>
-
-        <p id="noteStatus"
-        class="result"></p>
-
-    </div>
-    `;
-
-    document.getElementById(
-        "notes"
-    ).value=
-        localStorage.getItem(
-            "studyzenNotes"
-        ) || "";
-}
-
-
-function saveNotes(){
-
-    localStorage.setItem(
-        "studyzenNotes",
-        document.getElementById(
-            "notes"
-        ).value
-    );
-
-    document.getElementById(
-        "noteStatus"
-    ).innerText=
-        "✅ Notes saved!";
-}
-
-
-/* ================= QUIZ ================= */
-
-const questions=[
-
-["What is 5 × 6?","30"],
-
-["Capital of India?","New Delhi"],
-
-["Red Planet?","Mars"],
-
-["H₂O is commonly called?","Water"],
-
-["How many sides does a triangle have?","3"],
-
-["Largest planet?","Jupiter"]
 
 ];
 
-let currentQuestion;
+}
 
 
-function startQuiz(){
+/* =========================
+   SPECIAL ADOLESCENCE
+========================= */
 
-    currentQuestion=
-        questions[
-            Math.floor(
-                Math.random()*
-                questions.length
-            )
-        ];
+function adolescencePages(){
 
-    document.getElementById(
-        "content"
-    ).innerHTML=`
+return [
 
-    <div class="card">
+{
+title:"🧬 What Is Adolescence?",
+body:`
+<p>Adolescence is a stage of development between childhood
+and adulthood. During this period, people experience
+physical, mental, emotional and social changes.</p>
 
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
+<p>The timing of these changes is different for different
+people. There is no single timetable that everyone follows.</p>
 
-        <h2>🧠 Quick Quiz</h2>
+<div class="pagebox">
+⭐ Growing up is a natural process.
+</div>
+`
+},
 
-        <br>
+{
+title:"🌱 Physical Development",
+body:`
+<p>During adolescence, the body may grow more quickly and
+many physical features gradually change.</p>
 
-        <h3>
-        ${currentQuestion[0]}
-        </h3>
+<ul>
+<li>Growth can become faster.</li>
+<li>Body proportions change.</li>
+<li>Skin and hair may change.</li>
+<li>The reproductive system matures.</li>
+</ul>
 
-        <input
-        id="answer"
-        placeholder="Your answer">
+<p>These changes are normal parts of human development.</p>
+`
+},
 
-        <button onclick="checkQuiz()">
-            Submit
-        </button>
+{
+title:"🧪 Hormones and Puberty",
+body:`
+<p>Puberty is the period when the body undergoes changes
+that lead toward reproductive maturity.</p>
 
-        <p
-        id="quizResult"
-        class="result">
-        </p>
+<p>Hormones are chemical messengers that help coordinate
+many processes in the body. Hormonal activity contributes
+to several changes during puberty.</p>
 
-    </div>
-    `;
+<div class="pagebox">
+💡 The age and speed of development can vary greatly
+between individuals.
+</div>
+`
+},
+
+{
+title:"🥗 Nutrition and Healthy Habits",
+body:`
+<p>Growing bodies need nutritious food, adequate sleep,
+physical activity and good hygiene.</p>
+
+<ul>
+<li>Eat a varied and balanced diet.</li>
+<li>Drink enough water.</li>
+<li>Sleep adequately.</li>
+<li>Stay physically active.</li>
+<li>Maintain personal hygiene.</li>
+</ul>
+
+<p>Healthy habits support growth, learning and everyday
+wellbeing.</p>
+`
+},
+
+{
+title:"🧠 Emotional and Social Development",
+body:`
+<p>Adolescence can involve changes in emotions, friendships,
+responsibility and independence.</p>
+
+<p>People may begin forming stronger opinions and making
+more decisions for themselves. It is normal to have
+questions about growing up.</p>
+
+<div class="pagebox">
+🌟 Respect yourself and others. When something is confusing,
+talk to a trusted adult.
+</div>
+`
+},
+
+{
+title:"🏆 Revision and Questions",
+body:`
+<h3>Remember</h3>
+
+<ul>
+<li>Adolescence is a natural development stage.</li>
+<li>Physical development varies between people.</li>
+<li>Hormones help coordinate many body changes.</li>
+<li>Good nutrition and sleep are important.</li>
+<li>Emotional and social development also occur.</li>
+</ul>
+
+<h3>📝 Questions</h3>
+
+<p>1. What is adolescence?</p>
+<p>2. What is puberty?</p>
+<p>3. What are hormones?</p>
+<p>4. Why can development differ between people?</p>
+<p>5. Name two healthy habits.</p>
+`
+}
+
+];
+
+}
+
+
+/* =========================
+   OPEN READER
+========================= */
+
+let pages=[];
+let page=0;
+let currentSubject="";
+let currentChapter="";
+
+function openChapter(subject,chapter){
+
+currentSubject=subject;
+currentChapter=chapter;
+
+if(subject==="Science" &&
+chapter==="Adolescence"){
+
+pages=adolescencePages();
+
+}else{
+
+pages=makePages(subject,chapter);
+
+}
+
+page=0;
+renderPage();
+scrollToContent();
+
+}
+
+
+/* =========================
+   PAGE RENDER
+========================= */
+
+function renderPage(){
+
+let p=pages[page];
+
+document.getElementById("content")
+.innerHTML=`
+
+<div class="card">
+
+<button class="back"
+onclick="openSubject('${currentSubject}')">
+← Chapters
+</button>
+
+<div class="reader">
+
+<h2>📖 ${currentChapter}</h2>
+
+<h3>${p.title}</h3>
+
+${p.body}
+
+</div>
+
+<div class="pageNo">
+Page ${page+1} / ${pages.length}
+</div>
+
+<div style="text-align:center">
+
+<button onclick="prevPage()"
+${page===0?"disabled":""}>
+⬅ Previous
+</button>
+
+<button onclick="nextPage()"
+${page===pages.length-1?"disabled":""}>
+Next ➡
+</button>
+
+</div>
+
+${
+page===pages.length-1
+?
+`
+<div style="text-align:center">
+<button onclick="quiz('${currentSubject}','${currentChapter}')">
+🧠 Take Quiz
+</button>
+
+<button onclick="practice()">
+🎯 Practice
+</button>
+</div>
+`
+:""
+}
+
+</div>
+`;
+
+}
+
+
+function nextPage(){
+
+if(page<pages.length-1){
+page++;
+renderPage();
+scrollToContent();
+}
+
+}
+
+
+function prevPage(){
+
+if(page>0){
+page--;
+renderPage();
+scrollToContent();
+}
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const qs=[
+["What is 5 × 6?","30"],
+["What is 25 + 37?","62"],
+["What is H2O commonly called?","water"],
+["Which planet is called the Red Planet?","mars"],
+["How many sides does a triangle have?","3"],
+["What is the capital of India?","new delhi"]
+];
+
+let q;
+
+function quiz(subject="General",chapter="Quiz"){
+
+q=qs[Math.floor(Math.random()*qs.length)];
+
+document.getElementById("content").innerHTML=`
+
+<div class="card">
+
+<button class="back"
+onclick="closeContent()">← Back</button>
+
+<h2>🧠 Quiz</h2>
+
+<p>${subject} • ${chapter}</p>
+
+<h3>${q[0]}</h3>
+
+<input id="answer"
+placeholder="Type your answer">
+
+<button onclick="checkQuiz()">Submit</button>
+
+<p id="quizResult"></p>
+
+</div>
+`;
+
+scrollToContent();
+
 }
 
 
 function checkQuiz(){
 
-    const answer=
-        document.getElementById(
-            "answer"
-        ).value.trim().toLowerCase();
+let a=document.getElementById("answer")
+.value.trim().toLowerCase();
 
-    const correct=
-        currentQuestion[1].toLowerCase();
+if(a===q[1]){
 
-    if(answer===correct){
+let xp=Number(localStorage.getItem("xp")||0)+10;
 
-        document.getElementById(
-            "quizResult"
-        ).innerText=
-            "🎉 Correct! +10 XP";
+localStorage.setItem("xp",xp);
 
-        let xp=
-            Number(
-                localStorage.getItem(
-                    "studyzenXP"
-                ) || 0
-            );
+document.getElementById("quizResult")
+.innerText="🎉 Correct! +10 XP ⭐";
 
-        xp+=10;
+}else{
 
-        localStorage.setItem(
-            "studyzenXP",
-            xp
-        );
+document.getElementById("quizResult")
+.innerText="❌ Try again!";
+}
 
-    }else{
-
-        document.getElementById(
-            "quizResult"
-        ).innerText=
-            "❌ Try again!";
-    }
 }
 
 
-/* ================= PRACTICE ================= */
+/* =========================
+   NOTES
+========================= */
+
+function notes(){
+
+document.getElementById("content").innerHTML=`
+
+<div class="card">
+
+<button class="back"
+onclick="closeContent()">← Back</button>
+
+<h2>📝 My Notes</h2>
+
+<textarea id="notes"
+placeholder="Write your notes here..."></textarea>
+
+<button onclick="saveNotes()">💾 Save Notes</button>
+
+<p id="noteMsg"></p>
+
+</div>
+`;
+
+document.getElementById("notes").value=
+localStorage.getItem("notes")||"";
+
+scrollToContent();
+
+}
+
+
+function saveNotes(){
+
+localStorage.setItem(
+"notes",
+document.getElementById("notes").value
+);
+
+document.getElementById("noteMsg")
+.innerText="✅ Notes saved!";
+
+}
+
+
+/* =========================
+   PRACTICE
+========================= */
 
 function practice(){
 
-    document.getElementById(
-        "content"
-    ).innerHTML=`
+document.getElementById("content").innerHTML=`
 
-    <div class="card">
+<div class="card">
 
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
+<button class="back"
+onclick="closeContent()">← Back</button>
 
-        <h2>🎯 Practice Zone</h2>
+<h2>🎯 Practice Zone</h2>
 
-        <br>
+<p>1. Calculate: 25 + 37</p>
+<input id="p1">
 
-        <h3>Question 1</h3>
+<p>2. Largest planet?</p>
+<input id="p2">
 
-        <p>
-        Calculate: 25 + 37
-        </p>
+<button onclick="checkPractice()">Check</button>
 
-        <input id="p1">
+<p id="practiceResult"></p>
 
-        <br>
+</div>
+`;
 
-        <h3>Question 2</h3>
+scrollToContent();
 
-        <p>
-        Which is the largest planet?
-        </p>
-
-        <input id="p2">
-
-        <button onclick="checkPractice()">
-            Check
-        </button>
-
-        <p
-        id="practiceResult"
-        class="result">
-        </p>
-
-    </div>
-    `;
 }
 
 
 function checkPractice(){
 
-    let score=0;
+let score=0;
 
-    if(
-        document.getElementById("p1")
-        .value.trim()==="62"
-    )score++;
+if(document.getElementById("p1").value.trim()==="62")
+score++;
 
-    if(
-        document.getElementById("p2")
-        .value.trim()
-        .toLowerCase()==="jupiter"
-    )score++;
+if(document.getElementById("p2").value.trim().toLowerCase()==="jupiter")
+score++;
 
-    document.getElementById(
-        "practiceResult"
-    ).innerText=
-        "⭐ Score: "+score+"/2";
+document.getElementById("practiceResult")
+.innerText="⭐ Score: "+score+"/2";
+
 }
 
 
-/* ================= PROGRESS ================= */
+/* =========================
+   PROGRESS
+========================= */
 
-function showProgress(){
+function progress(){
 
-    const xp=
-        Number(
-            localStorage.getItem(
-                "studyzenXP"
-            ) || 0
-        );
+let xp=Number(localStorage.getItem("xp")||0);
 
-    const percent=
-        Math.min(xp,100);
+document.getElementById("content").innerHTML=`
 
-    document.getElementById(
-        "content"
-    ).innerHTML=`
+<div class="card">
 
-    <div class="card">
+<button class="back"
+onclick="closeContent()">← Back</button>
 
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
+<h2>📊 Progress</h2>
 
-        <h2>📊 My Progress</h2>
+<h3>⭐ XP: ${xp}</h3>
 
-        <br>
+<p>Keep learning and collecting XP! 🚀</p>
 
-        <p>
-        ⭐ XP Earned:
-        <b>${xp}</b>
-        </p>
+</div>
+`;
 
-        <div class="progress">
+scrollToContent();
 
-            <div class="bar"
-            style="width:${percent}%">
-            </div>
-
-        </div>
-
-        <br>
-
-        <p>
-        Keep going! Every question makes
-        you stronger. 🚀
-        </p>
-
-    </div>
-    `;
 }
 
 
-/* ================= SEARCH ================= */
+/* =========================
+   SEARCH
+========================= */
 
-function searchBox(){
+function searchPage(){
 
-    document.getElementById(
-        "content"
-    ).innerHTML=`
+document.getElementById("content").innerHTML=`
 
-    <div class="card">
+<div class="card">
 
-        <button class="back"
-        onclick="closeContent()">
-        ← Back
-        </button>
+<button class="back"
+onclick="closeContent()">← Back</button>
 
-        <h2>🔍 Search</h2>
+<h2>🔍 Search</h2>
 
-        <input
-        id="searchInput"
-        placeholder="Search subjects or topics..."
-        oninput="searchNow()">
+<input id="search"
+placeholder="Search subject or chapter..."
+oninput="doSearch()">
 
-        <div id="searchResults"></div>
+<div id="results"></div>
 
-    </div>
-    `;
+</div>
+`;
+
+scrollToContent();
+
 }
 
 
-function searchNow(){
+function doSearch(){
 
-    const text=
-        document.getElementById(
-            "searchInput"
-        ).value.toLowerCase();
+let s=document.getElementById("search")
+.value.toLowerCase();
 
-    let results=[];
+let out=[];
 
-    Object.keys(chapters)
-    .forEach(subject=>{
+Object.keys(chapterMap).forEach(subject=>{
 
-        if(
-            subject
-            .toLowerCase()
-            .includes(text)
-        ){
-            results.push(
-                "📘 "+subject
-            );
-        }
+if(subject.toLowerCase().includes(s))
+out.push("📘 "+subject);
 
-        chapters[subject]
-        .forEach(chapter=>{
+chapterMap[subject].forEach(ch=>{
 
-            if(
-                chapter
-                .toLowerCase()
-                .includes(text)
-            ){
-                results.push(
-                    "📖 "+chapter
-                );
-            }
+if(ch.toLowerCase().includes(s))
+out.push("📖 "+ch);
 
-        });
+});
 
-    });
+});
 
-    document.getElementById(
-        "searchResults"
-    ).innerHTML=
+document.getElementById("results").innerHTML=
+out.length
+?out.map(x=>`<div class="chapter">${x}</div>`).join("")
+:"<p>No results found.</p>";
 
-        results.length
-
-        ? results
-            .slice(0,30)
-            .map(x=>
-                `<div class="chapter">
-                ${x}
-                </div>`
-            )
-            .join("")
-
-        : "<p style='margin-top:15px'>No results found.</p>";
 }
 
 
-/* ================= DARK MODE ================= */
+/* =========================
+   DARK MODE
+========================= */
 
 function darkMode(){
 
-    document.body.classList.toggle(
-        "dark"
-    );
+document.body.classList.toggle("dark");
 
-    localStorage.setItem(
-        "studyzenDark",
-        document.body.classList.contains(
-            "dark"
-        )
-    );
+localStorage.setItem(
+"dark",
+document.body.classList.contains("dark")
+);
+
 }
 
 
-/* ================= CLOSE ================= */
+/* =========================
+   HELPERS
+========================= */
 
 function closeContent(){
 
-    document.getElementById(
-        "content"
-    ).innerHTML="";
+document.getElementById("content").innerHTML="";
+
+}
+
+function scrollToContent(){
+
+window.scrollTo({
+top:document.getElementById("content").offsetTop-15,
+behavior:"smooth"
+});
+
 }
 
 
-/* ================= LOAD ================= */
+/* =========================
+   LOAD SAVED BOARD
+========================= */
 
-if(
-    localStorage.getItem(
-        "studyzenDark"
-    )==="true"
-){
-    document.body.classList.add("dark");
-}
+if(localStorage.getItem("dark")==="true")
+document.body.classList.add("dark");
 
-const savedBoard=
-    localStorage.getItem(
-        "studyzenBoard"
-    );
+if(localStorage.getItem("board")){
 
-if(savedBoard){
+board=localStorage.getItem("board");
 
-    board=savedBoard;
+document.getElementById("classBox")
+.classList.remove("hidden");
 
-    document.getElementById(
-        "classSection"
-    ).classList.remove("hidden");
+document.getElementById("boardMsg")
+.innerText="✅ "+board+" selected!";
 
-    document.getElementById(
-        "boardMessage"
-    ).innerText=
-        "✅ "+board+" selected!";
 }
 
 </script>
