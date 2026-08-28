@@ -15,9 +15,9 @@
 }
 
 body{
-    background:#f4f6ff;
+    background:#f4f7ff;
     color:#222;
-    transition:0.3s;
+    transition:.3s;
 }
 
 header{
@@ -33,7 +33,6 @@ header h1{
 
 header p{
     margin-top:8px;
-    font-size:17px;
 }
 
 .container{
@@ -44,7 +43,7 @@ header p{
 
 .card{
     background:white;
-    padding:25px;
+    padding:24px;
     margin:18px 0;
     border-radius:18px;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
@@ -52,9 +51,9 @@ header p{
 
 .quote{
     text-align:center;
-    font-size:18px;
     font-weight:bold;
-    margin:15px 0 22px;
+    font-size:18px;
+    margin:15px 0;
 }
 
 .grid{
@@ -70,24 +69,19 @@ header p{
     text-align:center;
 }
 
-.item h3{
-    margin-bottom:8px;
-}
-
 .item p{
-    font-size:14px;
     color:#666;
+    margin-top:7px;
 }
 
 button{
     border:0;
-    padding:11px 17px;
+    padding:11px 16px;
     border-radius:10px;
     background:#4f46e5;
     color:white;
     cursor:pointer;
     margin-top:12px;
-    font-size:14px;
 }
 
 button:hover{
@@ -97,10 +91,6 @@ button:hover{
 .back{
     background:#555;
     margin-bottom:15px;
-}
-
-.hidden{
-    display:none;
 }
 
 select,input,textarea{
@@ -113,27 +103,26 @@ select,input,textarea{
 }
 
 textarea{
-    height:220px;
+    min-height:220px;
     resize:vertical;
 }
 
+.hidden{
+    display:none;
+}
+
 .chapter{
-    background:#f5f6ff;
-    padding:15px;
-    margin:9px 0;
+    background:#f3f5ff;
+    padding:16px;
     border-radius:11px;
+    margin:9px 0;
 }
 
 .tool{
-    text-align:center;
     background:#f5f3ff;
     padding:20px;
     border-radius:15px;
-}
-
-.result{
-    margin-top:15px;
-    font-weight:bold;
+    text-align:center;
 }
 
 .progress{
@@ -144,19 +133,16 @@ textarea{
     margin-top:12px;
 }
 
-.progressBar{
+.bar{
     height:100%;
     width:0%;
     background:#4f46e5;
 }
 
-footer{
-    text-align:center;
-    padding:25px;
-    color:#777;
+.result{
+    margin-top:12px;
+    font-weight:bold;
 }
-
-/* DARK MODE */
 
 .dark{
     background:#15151d;
@@ -185,7 +171,11 @@ footer{
     color:#bbb;
 }
 
-/* MOBILE */
+footer{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
 
 @media(max-width:600px){
     header h1{
@@ -194,10 +184,6 @@ footer{
 
     .container{
         padding:12px;
-    }
-
-    .card{
-        padding:18px;
     }
 }
 </style>
@@ -212,7 +198,7 @@ footer{
 
 <div class="container">
 
-<!-- ================= BOARD ================= -->
+<!-- BOARD -->
 
 <div class="card" id="boardSection">
 
@@ -228,7 +214,7 @@ footer{
             <h3>🇮🇳 CBSE</h3>
             <p>Central Board of Secondary Education</p>
             <button onclick="selectBoard('CBSE')">
-                Choose CBSE
+                Choose
             </button>
         </div>
 
@@ -236,15 +222,15 @@ footer{
             <h3>🏫 ICSE</h3>
             <p>Indian Certificate of Secondary Education</p>
             <button onclick="selectBoard('ICSE')">
-                Choose ICSE
+                Choose
             </button>
         </div>
 
         <div class="item">
             <h3>📚 State Board</h3>
-            <p>Choose your state board</p>
+            <p>State curriculum</p>
             <button onclick="selectBoard('State Board')">
-                Choose State Board
+                Choose
             </button>
         </div>
 
@@ -255,7 +241,7 @@ footer{
 </div>
 
 
-<!-- ================= CLASS ================= -->
+<!-- CLASS -->
 
 <div class="card hidden" id="classSection">
 
@@ -289,11 +275,47 @@ footer{
 </div>
 
 
-<!-- ================= DASHBOARD ================= -->
+<!-- STREAM -->
+
+<div class="card hidden" id="streamSection">
+
+    <h2>🎯 Choose Your Stream</h2>
+
+    <p class="quote">
+        “Your interests can become your future.” 🌟
+    </p>
+
+    <div class="grid">
+
+        <div class="item">
+            <h3>🔬 Science</h3>
+            <button onclick="selectStream('Science')">
+                Choose
+            </button>
+        </div>
+
+        <div class="item">
+            <h3>💰 Commerce</h3>
+            <button onclick="selectStream('Commerce')">
+                Choose
+            </button>
+        </div>
+
+        <div class="item">
+            <h3>🌍 Humanities</h3>
+            <button onclick="selectStream('Humanities')">
+                Choose
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
 
 <div id="dashboard" class="hidden">
-
-    <!-- SUBJECTS -->
 
     <div class="card">
 
@@ -320,12 +342,12 @@ footer{
 
             <div class="tool">
                 <h3>📝 Notes</h3>
-                <button onclick="showNotes()">Open Notes</button>
+                <button onclick="showNotes()">Open</button>
             </div>
 
             <div class="tool">
                 <h3>🧠 Quiz</h3>
-                <button onclick="startQuiz()">Start Quiz</button>
+                <button onclick="startQuiz()">Start</button>
             </div>
 
             <div class="tool">
@@ -335,7 +357,7 @@ footer{
 
             <div class="tool">
                 <h3>📊 Progress</h3>
-                <button onclick="showProgress()">View Progress</button>
+                <button onclick="showProgress()">View</button>
             </div>
 
             <div class="tool">
@@ -345,7 +367,7 @@ footer{
 
             <div class="tool">
                 <h3>🌙 Theme</h3>
-                <button onclick="darkMode()">Dark Mode</button>
+                <button onclick="darkMode()">Toggle</button>
             </div>
 
         </div>
@@ -355,112 +377,61 @@ footer{
 </div>
 
 
-<!-- ================= CONTENT ================= -->
-
 <div id="content"></div>
 
 </div>
 
 
 <footer>
-    StudyZen V1.1 🚀 • Study smarter, not harder.
+StudyZen V1.1 🚀 • Learn Smarter
 </footer>
 
 
 <script>
 
-/* =====================================================
-   BOARD
-===================================================== */
+/* ================= BOARD ================= */
 
-let selectedBoard = localStorage.getItem("studyzenBoard") || "";
+let board="";
 
-function selectBoard(board){
+function selectBoard(value){
 
-    selectedBoard = board;
+    board=value;
 
-    localStorage.setItem("studyzenBoard",board);
+    localStorage.setItem(
+        "studyzenBoard",
+        value
+    );
 
-    document.getElementById("boardMessage").innerText =
-        "✅ " + board + " selected!";
+    document.getElementById(
+        "boardMessage"
+    ).innerText=
+        "✅ "+value+" selected!";
 
-    document.getElementById("classSection")
-        .classList.remove("hidden");
+    document.getElementById(
+        "classSection"
+    ).classList.remove("hidden");
 }
 
 
-/* =====================================================
-   SUBJECTS BY CLASS
-===================================================== */
+/* ================= CLASS SUBJECTS ================= */
 
-const subjects = {
+const classSubjects={
 
-1:[
-"English",
-"Mathematics",
-"Hindi",
-"EVS",
-"Computer"
-],
+1:["English","Mathematics","Hindi","EVS","Computer"],
 
-2:[
-"English",
-"Mathematics",
-"Hindi",
-"EVS",
-"Computer"
-],
+2:["English","Mathematics","Hindi","EVS","Computer"],
 
-3:[
-"English",
-"Mathematics",
-"Hindi",
-"EVS",
-"Computer"
-],
+3:["English","Mathematics","Hindi","EVS","Computer"],
 
-4:[
-"English",
-"Mathematics",
-"Hindi",
-"EVS",
-"Computer"
-],
+4:["English","Mathematics","Hindi","EVS","Computer"],
 
-5:[
-"English",
-"Mathematics",
-"Hindi",
-"EVS",
-"Computer"
-],
+5:["English","Mathematics","Hindi","EVS","Computer"],
 
-6:[
-"English",
-"Mathematics",
-"Science",
-"Social Science",
-"Hindi",
-"Computer"
-],
+6:["English","Mathematics","Science","Social Science","Hindi","Computer"],
 
-7:[
-"English",
-"Mathematics",
-"Science",
-"Social Science",
-"Hindi",
-"Computer"
-],
+7:["English","Mathematics","Science","Social Science","Hindi","Computer"],
 
-8:[
-"English",
-"Mathematics",
-"Science",
-"Social Science",
-"Hindi",
-"Computer"
-],
+8:["English","Mathematics","Science","Social Science","Hindi","Computer"],
 
 9:[
 "English",
@@ -480,38 +451,41 @@ const subjects = {
 "Hindi",
 "Computer",
 "Artificial Intelligence"
-],
+]
 
-11:[
+};
+
+
+/* ================= STREAM SUBJECTS ================= */
+
+const streams={
+
+Science:[
 "English",
 "Physics",
 "Chemistry",
 "Mathematics",
 "Biology",
 "Computer Science",
-"Economics",
-"Accountancy",
-"Business Studies",
-"Political Science",
-"Geography",
-"History",
-"Psychology",
 "Physical Education"
 ],
 
-12:[
+Commerce:[
 "English",
-"Physics",
-"Chemistry",
-"Mathematics",
-"Biology",
-"Computer Science",
-"Economics",
 "Accountancy",
 "Business Studies",
-"Political Science",
-"Geography",
+"Economics",
+"Mathematics",
+"Computer Science",
+"Physical Education"
+],
+
+Humanities:[
+"English",
 "History",
+"Geography",
+"Political Science",
+"Economics",
 "Psychology",
 "Physical Education"
 ]
@@ -519,42 +493,62 @@ const subjects = {
 };
 
 
-/* =====================================================
-   CHAPTERS
-===================================================== */
+/* ================= CHAPTERS ================= */
 
-const chapters = {
-
-"Mathematics":[
-"Number Systems",
-"Algebra",
-"Linear Equations",
-"Geometry",
-"Mensuration",
-"Statistics",
-"Probability",
-"Coordinate Geometry"
-],
-
-"Science":[
-"Matter",
-"Physical and Chemical Changes",
-"Motion",
-"Force and Pressure",
-"Heat",
-"Light",
-"Sound",
-"Electricity",
-"Environment",
-"Life Processes"
-],
+const chapters={
 
 "English":[
-"Reading Comprehension",
+"Reading",
 "Grammar",
 "Writing Skills",
 "Literature",
 "Vocabulary"
+],
+
+"Mathematics":[
+"Numbers",
+"Algebra",
+"Geometry",
+"Mensuration",
+"Statistics",
+"Probability"
+],
+
+"Hindi":[
+"वर्णमाला",
+"व्याकरण",
+"पठन",
+"लेखन",
+"साहित्य"
+],
+
+"EVS":[
+"Myself",
+"My Family",
+"Food",
+"Plants",
+"Animals",
+"My School"
+],
+
+"Computer":[
+"Computer Basics",
+"Keyboard",
+"Mouse",
+"Internet",
+"Coding",
+"Cyber Safety"
+],
+
+"Science":[
+"Matter",
+"Motion",
+"Force",
+"Heat",
+"Light",
+"Sound",
+"Electricity",
+"Environment"
 ],
 
 "Social Science":[
@@ -565,26 +559,8 @@ const chapters = {
 "Map Work"
 ],
 
-"Hindi":[
-"व्याकरण",
-"पठन",
-"लेखन",
-"साहित्य",
-"शब्द भंडार"
-],
-
-"Computer":[
-"Computer Basics",
-"Internet",
-"Algorithms",
-"Coding",
-"Cyber Safety",
-"AI Basics"
-],
-
 "Artificial Intelligence":[
-"Introduction to AI",
-"AI Applications",
+"AI Basics",
 "Data",
 "Machine Learning",
 "Computer Vision",
@@ -600,7 +576,6 @@ const chapters = {
 "Gravitation",
 "Thermodynamics",
 "Waves",
-"Electricity",
 "Optics"
 ],
 
@@ -625,26 +600,16 @@ const chapters = {
 ],
 
 "Computer Science":[
-"Python Basics",
+"Python",
 "Data Types",
-"Conditional Statements",
+"Conditions",
 "Loops",
 "Functions",
 "Lists",
 "Dictionaries",
 "File Handling",
 "SQL",
-"Computer Networks"
-],
-
-"Economics":[
-"Introduction",
-"Statistics",
-"Demand and Supply",
-"Production",
-"Markets",
-"National Income",
-"Money and Banking"
+"Networks"
 ],
 
 "Accountancy":[
@@ -654,28 +619,34 @@ const chapters = {
 "Trial Balance",
 "Depreciation",
 "Financial Statements",
-"Partnership",
-"Company Accounts"
+"Partnership"
 ],
 
 "Business Studies":[
 "Nature of Business",
 "Forms of Business",
-"Private and Public Sector",
 "Business Services",
 "Management",
 "Marketing",
 "Finance"
 ],
 
-"Political Science":[
-"Constitution",
-"Rights",
-"Political Institutions",
-"Federalism",
-"Democracy",
-"Political Theory",
-"International Relations"
+"Economics":[
+"Introduction",
+"Statistics",
+"Demand",
+"Supply",
+"Production",
+"Markets",
+"Money and Banking"
+],
+
+"History":[
+"Ancient History",
+"Medieval History",
+"Modern History",
+"World History",
+"Indian History"
 ],
 
 "Geography":[
@@ -684,22 +655,22 @@ const chapters = {
 "Climate",
 "Water",
 "Resources",
-"Population",
-"Maps"
+"Population"
 ],
 
-"History":[
-"Ancient History",
-"Medieval History",
-"Modern History",
-"World History",
-"Indian National Movement"
+"Political Science":[
+"Constitution",
+"Rights",
+"Political Institutions",
+"Federalism",
+"Democracy",
+"International Relations"
 ],
 
 "Psychology":[
-"Introduction to Psychology",
-"Methods of Psychology",
-"Human Development",
+"Introduction",
+"Methods",
+"Development",
 "Learning",
 "Memory",
 "Motivation",
@@ -712,53 +683,105 @@ const chapters = {
 "Sports",
 "Nutrition",
 "Training",
-"Health and Wellness"
+"Health"
 ]
 
 };
 
 
-/* =====================================================
-   CLASS SELECTION
-===================================================== */
+/* ================= VARIABLES ================= */
 
-const classSelect =
-document.getElementById("classSelect");
+let selectedClass="";
+let selectedStream="";
 
-classSelect.addEventListener("change",function(){
 
-    const c=this.value;
+/* ================= CLASS SELECT ================= */
 
-    if(!c){
-        document.getElementById("dashboard")
-            .classList.add("hidden");
+document.getElementById(
+    "classSelect"
+).addEventListener("change",function(){
+
+    selectedClass=this.value;
+
+    document.getElementById(
+        "dashboard"
+    ).classList.add("hidden");
+
+    if(!selectedClass)return;
+
+    document.getElementById(
+        "classMessage"
+    ).innerText=
+        "✅ Class "+selectedClass+" selected!";
+
+    /* STREAM FOR 11 & 12 */
+
+    if(
+        selectedClass==="11" ||
+        selectedClass==="12"
+    ){
+
+        document.getElementById(
+            "streamSection"
+        ).classList.remove("hidden");
+
         return;
     }
 
-    document.getElementById("dashboard")
-        .classList.remove("hidden");
+    document.getElementById(
+        "streamSection"
+    ).classList.add("hidden");
 
-    document.getElementById("classMessage").innerText =
-        "✅ Class " + c + " selected!";
-
-    document.getElementById("selectedInfo").innerText =
-        "🎓 " + selectedBoard + " • Class " + c;
-
-    showSubjects(c);
+    showDashboard(
+        classSubjects[selectedClass]
+    );
 });
 
 
-/* =====================================================
-   SHOW SUBJECTS
-===================================================== */
+/* ================= STREAM ================= */
 
-function showSubjects(c){
+function selectStream(stream){
 
-    const box=document.getElementById("subjects");
+    selectedStream=stream;
+
+    localStorage.setItem(
+        "studyzenStream",
+        stream
+    );
+
+    document.getElementById(
+        "streamSection"
+    ).classList.add("hidden");
+
+    showDashboard(
+        streams[stream]
+    );
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function showDashboard(list){
+
+    document.getElementById(
+        "dashboard"
+    ).classList.remove("hidden");
+
+    document.getElementById(
+        "selectedInfo"
+    ).innerText=
+        "🎓 "+board+
+        " • Class "+selectedClass+
+        (selectedStream
+        ? " • "+selectedStream
+        : "");
+
+    const box=
+        document.getElementById("subjects");
 
     box.innerHTML="";
 
-    subjects[c].forEach(subject=>{
+    list.forEach(subject=>{
 
         box.innerHTML+=`
 
@@ -766,9 +789,16 @@ function showSubjects(c){
 
             <h3>📘 ${subject}</h3>
 
+            <p>
+            ${chapters[subject]
+            ? chapters[subject].length
+            : 5}
+            topics
+            </p>
+
             <button
             onclick="openSubject('${subject}')">
-                Open Subject
+                Open
             </button>
 
         </div>
@@ -778,19 +808,16 @@ function showSubjects(c){
 }
 
 
-/* =====================================================
-   OPEN SUBJECT
-===================================================== */
+/* ================= SUBJECT ================= */
 
 function openSubject(subject){
 
-    const list =
-        chapters[subject] ||
-        [
+    const list=
+        chapters[subject] || [
             "Introduction",
-            "Chapter 1",
-            "Chapter 2",
-            "Chapter 3",
+            "Topic 1",
+            "Topic 2",
+            "Topic 3",
             "Revision"
         ];
 
@@ -805,12 +832,13 @@ function openSubject(subject){
 
         <h2>📖 ${subject}</h2>
 
-        <p>🎓 ${selectedBoard} • Class ${classSelect.value}</p>
+        <p>
+        Class ${selectedClass}
+        </p>
 
         <br>
 
-        <h3>📚 Chapters</h3>
-
+        <h3>📚 Topics</h3>
     `;
 
     list.forEach((chapter,index)=>{
@@ -819,13 +847,20 @@ function openSubject(subject){
 
         <div class="chapter">
 
-            <b>${index+1}. ${chapter}</b>
+            <b>
+            ${index+1}. ${chapter}
+            </b>
 
             <br>
 
             <button
-            onclick="openChapter('${subject}','${chapter}')">
-                📚 Study Chapter
+            onclick="openLesson('${subject}','${chapter}')">
+                📖 Learn
+            </button>
+
+            <button
+            onclick="startQuiz()">
+                🧠 Quiz
             </button>
 
         </div>
@@ -835,22 +870,26 @@ function openSubject(subject){
 
     html+=`</div>`;
 
-    document.getElementById("content").innerHTML=html;
+    document.getElementById(
+        "content"
+    ).innerHTML=html;
 
     window.scrollTo({
-        top:document.getElementById("content").offsetTop,
+        top:document.getElementById(
+            "content"
+        ).offsetTop,
         behavior:"smooth"
     });
 }
 
 
-/* =====================================================
-   CHAPTER
-===================================================== */
+/* ================= LESSON ================= */
 
-function openChapter(subject,chapter){
+function openLesson(subject,chapter){
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -862,35 +901,39 @@ function openChapter(subject,chapter){
         <h2>📖 ${chapter}</h2>
 
         <p>
-        ${subject} • Class ${classSelect.value}
+        ${subject} • Class ${selectedClass}
         </p>
 
         <br>
 
-        <h3>📝 Quick Study Notes</h3>
+        <h3>📝 Study Guide</h3>
 
-        <p style="margin-top:12px;line-height:1.6">
+        <p style="
+        margin-top:12px;
+        line-height:1.7">
 
-        Welcome to the StudyZen learning page for
-        <b>${chapter}</b>.
+        Welcome to your StudyZen lesson.
 
-        Read the chapter carefully, write important
-        points, learn the key concepts and practise
-        questions.
+        Study <b>${chapter}</b>,
+        understand the main ideas,
+        make short notes and practise
+        questions after learning.
 
         </p>
 
         <br>
 
-        <h3>🎯 Study Checklist</h3>
+        <h3>🎯 Mission</h3>
 
-        <ul style="margin:12px 0 0 22px;line-height:1.8">
+        <ul style="
+        margin:12px 0 0 22px;
+        line-height:1.8">
 
-            <li>Read the chapter</li>
-            <li>Understand the concepts</li>
-            <li>Make short notes</li>
-            <li>Practise questions</li>
-            <li>Revise the chapter</li>
+            <li>📖 Read</li>
+            <li>🧠 Understand</li>
+            <li>✏️ Make notes</li>
+            <li>🎯 Practise</li>
+            <li>🧠 Take a quiz</li>
 
         </ul>
 
@@ -905,23 +948,17 @@ function openChapter(subject,chapter){
         </button>
 
     </div>
-
     `;
-
-    window.scrollTo({
-        top:document.getElementById("content").offsetTop,
-        behavior:"smooth"
-    });
 }
 
 
-/* =====================================================
-   NOTES
-===================================================== */
+/* ================= NOTES ================= */
 
 function showNotes(){
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -932,14 +969,10 @@ function showNotes(){
 
         <h2>📝 My Notes</h2>
 
-        <p style="margin-top:10px">
-        Your notes are saved in this browser.
-        </p>
-
         <textarea
         id="notes"
-        placeholder="Write your study notes here..."
-        ></textarea>
+        placeholder="Write your notes here...">
+        </textarea>
 
         <button onclick="saveNotes()">
             💾 Save Notes
@@ -949,69 +982,67 @@ function showNotes(){
         class="result"></p>
 
     </div>
-
     `;
 
-    const saved=
-        localStorage.getItem("studyzenNotes") || "";
-
-    document.getElementById("notes").value=saved;
+    document.getElementById(
+        "notes"
+    ).value=
+        localStorage.getItem(
+            "studyzenNotes"
+        ) || "";
 }
 
 
 function saveNotes(){
 
-    const notes=
-        document.getElementById("notes").value;
-
     localStorage.setItem(
         "studyzenNotes",
-        notes
+        document.getElementById(
+            "notes"
+        ).value
     );
 
-    document.getElementById("noteStatus").innerText=
-        "✅ Notes saved successfully!";
+    document.getElementById(
+        "noteStatus"
+    ).innerText=
+        "✅ Notes saved!";
 }
 
 
-/* =====================================================
-   QUIZ
-===================================================== */
+/* ================= QUIZ ================= */
 
-const quizQuestions=[
+const questions=[
 
 ["What is 5 × 6?","30"],
 
-["What is the capital of India?","New Delhi"],
+["Capital of India?","New Delhi"],
 
-["Which planet is known as the Red Planet?","Mars"],
+["Red Planet?","Mars"],
 
-["What is H₂O commonly called?","Water"],
+["H₂O is commonly called?","Water"],
 
 ["How many sides does a triangle have?","3"],
 
-["What is 10 + 15?","25"],
-
-["Which gas do humans need for respiration?","Oxygen"],
-
-["What is the largest planet?","Jupiter"]
+["Largest planet?","Jupiter"]
 
 ];
 
-
-let currentQuestion=null;
+let currentQuestion;
 
 
 function startQuiz(){
 
     currentQuestion=
-        quizQuestions[
+        questions[
             Math.floor(
-                Math.random()*quizQuestions.length
+                Math.random()*
+                questions.length
             )
         ];
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -1020,71 +1051,80 @@ function startQuiz(){
         ← Back
         </button>
 
-        <h2>🧠 StudyZen Quiz</h2>
+        <h2>🧠 Quick Quiz</h2>
 
         <br>
 
-        <h3>${currentQuestion[0]}</h3>
+        <h3>
+        ${currentQuestion[0]}
+        </h3>
 
         <input
         id="answer"
-        placeholder="Type your answer..."
-        >
+        placeholder="Your answer">
 
-        <button onclick="checkAnswer()">
-            Submit Answer
+        <button onclick="checkQuiz()">
+            Submit
         </button>
 
-        <p id="quizResult"
-        class="result"></p>
+        <p
+        id="quizResult"
+        class="result">
+        </p>
 
     </div>
-
     `;
 }
 
 
-function checkAnswer(){
+function checkQuiz(){
 
     const answer=
-        document.getElementById("answer")
-        .value.trim().toLowerCase();
+        document.getElementById(
+            "answer"
+        ).value.trim().toLowerCase();
 
     const correct=
         currentQuestion[1].toLowerCase();
 
     if(answer===correct){
 
-        document.getElementById("quizResult").innerText=
-            "🎉 Correct! Excellent work!";
+        document.getElementById(
+            "quizResult"
+        ).innerText=
+            "🎉 Correct! +10 XP";
 
-        let score=
+        let xp=
             Number(
-                localStorage.getItem("studyzenScore") || 0
+                localStorage.getItem(
+                    "studyzenXP"
+                ) || 0
             );
 
-        score++;
+        xp+=10;
 
         localStorage.setItem(
-            "studyzenScore",
-            score
+            "studyzenXP",
+            xp
         );
 
     }else{
 
-        document.getElementById("quizResult").innerText=
-            "❌ Not quite. Try again!";
+        document.getElementById(
+            "quizResult"
+        ).innerText=
+            "❌ Try again!";
     }
 }
 
 
-/* =====================================================
-   PRACTICE
-===================================================== */
+/* ================= PRACTICE ================= */
 
 function practice(){
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -1098,26 +1138,33 @@ function practice(){
         <br>
 
         <h3>Question 1</h3>
-        <p>Calculate: 25 + 37</p>
+
+        <p>
+        Calculate: 25 + 37
+        </p>
 
         <input id="p1">
 
         <br>
 
         <h3>Question 2</h3>
-        <p>Which is the largest planet?</p>
+
+        <p>
+        Which is the largest planet?
+        </p>
 
         <input id="p2">
 
         <button onclick="checkPractice()">
-            Check Answers
+            Check
         </button>
 
-        <p id="practiceResult"
-        class="result"></p>
+        <p
+        id="practiceResult"
+        class="result">
+        </p>
 
     </div>
-
     `;
 }
 
@@ -1126,41 +1173,41 @@ function checkPractice(){
 
     let score=0;
 
-    const a=
+    if(
         document.getElementById("p1")
-        .value.trim();
+        .value.trim()==="62"
+    )score++;
 
-    const b=
+    if(
         document.getElementById("p2")
         .value.trim()
-        .toLowerCase();
-
-    if(a==="62") score++;
-
-    if(b==="jupiter") score++;
+        .toLowerCase()==="jupiter"
+    )score++;
 
     document.getElementById(
         "practiceResult"
     ).innerText=
-        "⭐ Your Score: "+score+"/2";
+        "⭐ Score: "+score+"/2";
 }
 
 
-/* =====================================================
-   PROGRESS
-===================================================== */
+/* ================= PROGRESS ================= */
 
 function showProgress(){
 
-    const score=
+    const xp=
         Number(
-            localStorage.getItem("studyzenScore") || 0
+            localStorage.getItem(
+                "studyzenXP"
+            ) || 0
         );
 
-    const percentage=
-        Math.min(score*10,100);
+    const percent=
+        Math.min(xp,100);
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -1174,14 +1221,14 @@ function showProgress(){
         <br>
 
         <p>
-        🧠 Correct Quiz Answers:
-        <b>${score}</b>
+        ⭐ XP Earned:
+        <b>${xp}</b>
         </p>
 
         <div class="progress">
 
-            <div class="progressBar"
-            style="width:${percentage}%">
+            <div class="bar"
+            style="width:${percent}%">
             </div>
 
         </div>
@@ -1189,22 +1236,22 @@ function showProgress(){
         <br>
 
         <p>
-        Keep learning and improving! 🚀
+        Keep going! Every question makes
+        you stronger. 🚀
         </p>
 
     </div>
-
     `;
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* ================= SEARCH ================= */
 
 function searchBox(){
 
-    document.getElementById("content").innerHTML=`
+    document.getElementById(
+        "content"
+    ).innerHTML=`
 
     <div class="card">
 
@@ -1213,18 +1260,16 @@ function searchBox(){
         ← Back
         </button>
 
-        <h2>🔍 Search StudyZen</h2>
+        <h2>🔍 Search</h2>
 
         <input
         id="searchInput"
-        placeholder="Search subject or chapter..."
-        oninput="searchNow()"
-        >
+        placeholder="Search subjects or topics..."
+        oninput="searchNow()">
 
         <div id="searchResults"></div>
 
     </div>
-
     `;
 }
 
@@ -1232,21 +1277,36 @@ function searchBox(){
 function searchNow(){
 
     const text=
-        document.getElementById("searchInput")
-        .value.toLowerCase();
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
 
     let results=[];
 
-    Object.keys(chapters).forEach(subject=>{
+    Object.keys(chapters)
+    .forEach(subject=>{
 
-        if(subject.toLowerCase().includes(text)){
-            results.push("📘 "+subject);
+        if(
+            subject
+            .toLowerCase()
+            .includes(text)
+        ){
+            results.push(
+                "📘 "+subject
+            );
         }
 
-        chapters[subject].forEach(chapter=>{
+        chapters[subject]
+        .forEach(chapter=>{
 
-            if(chapter.toLowerCase().includes(text)){
-                results.push("📖 "+chapter);
+            if(
+                chapter
+                .toLowerCase()
+                .includes(text)
+            ){
+                results.push(
+                    "📖 "+chapter
+                );
             }
 
         });
@@ -1259,59 +1319,73 @@ function searchNow(){
 
         results.length
 
-        ? results.slice(0,30)
-            .map(x=>`
-                <div class="chapter">${x}</div>
-            `).join("")
+        ? results
+            .slice(0,30)
+            .map(x=>
+                `<div class="chapter">
+                ${x}
+                </div>`
+            )
+            .join("")
 
         : "<p style='margin-top:15px'>No results found.</p>";
 }
 
 
-/* =====================================================
-   DARK MODE
-===================================================== */
+/* ================= DARK MODE ================= */
 
 function darkMode(){
 
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle(
+        "dark"
+    );
 
     localStorage.setItem(
         "studyzenDark",
-        document.body.classList.contains("dark")
+        document.body.classList.contains(
+            "dark"
+        )
     );
 }
 
 
-/* =====================================================
-   CLOSE
-===================================================== */
+/* ================= CLOSE ================= */
 
 function closeContent(){
 
-    document.getElementById("content").innerHTML="";
+    document.getElementById(
+        "content"
+    ).innerHTML="";
 }
 
 
-/* =====================================================
-   LOAD SAVED SETTINGS
-===================================================== */
+/* ================= LOAD ================= */
 
 if(
-    localStorage.getItem("studyzenDark")
-    ==="true"
+    localStorage.getItem(
+        "studyzenDark"
+    )==="true"
 ){
     document.body.classList.add("dark");
 }
 
-if(selectedBoard){
+const savedBoard=
+    localStorage.getItem(
+        "studyzenBoard"
+    );
 
-    document.getElementById("classSection")
-        .classList.remove("hidden");
+if(savedBoard){
 
-    document.getElementById("boardMessage")
-        .innerText=
-        "✅ "+selectedBoard+" selected!";
+    board=savedBoard;
+
+    document.getElementById(
+        "classSection"
+    ).classList.remove("hidden");
+
+    document.getElementById(
+        "boardMessage"
+    ).innerText=
+        "✅ "+board+" selected!";
 }
 
 </script>
