@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5b4fde">
+<title>StudyZen 📚</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f7f7ff;color:#202436}
+header{background:linear-gradient(135deg,#5b4fde,#7c6ff0);color:#fff;padding:25px 18px;border-radius:0 0 25px 25px}
+.wrap{max-width:950px;margin:auto;padding:18px}.card{background:#fff;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 5px 20px #20243612}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+button,input,select{font:inherit}button{border:0;border-radius:12px;padding:12px 15px;cursor:pointer;font-weight:700}
+input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff}
+.primary{background:#5b4fde;color:#fff}.secondary{background:#edeaff;color:#4037a5}.danger{background:#ffe6e6;color:#a21b1b}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.nav button{background:#eeeaff;color:#4037a5}
+.section{display:none}.section.active{display:block}.muted{color:#687080}.quote{font-size:18px;line-height:1.5}
+.timer{text-align:center;font-size:48px;font-weight:800;margin:15px}.subject{padding:14px;background:#f5f3ff;border-radius:12px;margin:8px 0;cursor:pointer}
+.option{display:block;width:100%;text-align:left;background:#f1f1f5;margin:8px 0}.correct{background:#d7fae8!important}.wrong{background:#ffe0e0!important}
+.stat{font-size:27px;font-weight:800}.progress{height:12px;background:#e7e7ed;border-radius:10px;overflow:hidden}.bar{height:100%;width:0;background:#10b981}
+.result{line-height:1.7;background:#f8f8ff;border-radius:12px;padding:15px;margin-top:15px;white-space:pre-wrap}
+code{background:#eee;padding:2px 5px;border-radius:5px}
+@media(max-width:600px){.nav{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>🧠 StudyZen</h1><p>Focus. Learn. Improve.</p></div></header>
+<main class="wrap">
+
+<div class="card"><div class="quote" id="quote"></div><div class="muted" id="author"></div></div>
+
+<div class="card"><div class="grid">
+<div><b>Board</b><select id="board"><option>CBSE</option><option>ICSE</option><option>ISC</option><option>NIOS</option><option>State Board</option></select></div>
+<div><b>Class</b><select id="cls"></select></div>
+</div></div>
+
+<nav class="nav">
+<button onclick="show('study')">📚 Study</button><button onclick="show('test')">📝 Test</button>
+<button onclick="show('math')">➗ Math Solver</button><button onclick="show('progress')">📊 Progress</button>
+<button onclick="focusMode()">🔒 Focus Mode</button><button onclick="resetData()">♻️ Reset</button>
+</nav>
+
+<section id="study" class="section active card">
+<h2>📚 Study</h2><p class="muted">Select a subject. Topics are shown inside this screen.</p>
+<div id="subjects"></div><div class="timer" id="timer">00:00</div>
+<div class="grid"><button class="primary" id="timerBtn" onclick="studyTimer()">▶ Start Timer</button><button class="secondary" onclick="markStudied()">✅ Mark Studied</button></div>
+</section>
+
+<section id="test" class="section card">
+<h2>📝 Quick Test</h2><p id="testInfo" class="muted"></p><div id="quiz"></div>
+<button class="primary" onclick="startQuiz()">🎯 Start 5-Question Test</button>
+</section>
+
+<section id="math" class="section card">
+<h2>➗ Advanced Math Solver</h2>
+<p class="muted">Supports arithmetic, percentages, fractions, powers, roots, equations, quadratic equations, simultaneous equations, trigonometry, logs and many common expressions.</p>
+<input id="mathInput" placeholder="Examples: 3x+5=20  |  x^2-5x+6=0  |  sin(30)  |  25% of 80">
+<br><br><button class="primary" onclick="solveMath()">Solve Step-by-Step</button>
+<button class="secondary" onclick="clearMath()">Clear</button>
+<div id="mathResult"></div>
+</section>
+
+<section id="progress" class="section card">
+<h2>📊 Progress</h2><div class="grid">
+<div class="card"><div class="stat" id="mins">0</div><div class="muted">Study minutes</div></div>
+<div class="card"><div class="stat" id="tests">0</div><div class="muted">Tests</div></div>
+<div class="card"><div class="stat" id="ques">0</div><div class="muted">Questions</div></div>
+<div class="card"><div class="stat" id="acc">0%</div><div class="muted">Accuracy</div></div>
+</div><h3>Overall accuracy</h3><div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section id="focus" class="section card">
+<h2>🔒 Focus Mode</h2><p id="focusText">One task. No distractions.</p>
+<div class="timer" id="focusTimer">00:00</div>
+<button class="primary" onclick="focusTimerToggle()" id="focusBtn">▶ Start</button>
+<button class="danger" onclick="endFocus()">End Session</button>
+</section>
+
+</main>
+
+<script>
+const quotes=[
+["The secret of getting ahead is getting started.","Mark Twain"],
+["Success is the sum of small efforts, repeated day in and day out.","Robert Collier"],
+["The beautiful thing about learning is that no one can take it away from you.","B. B. King"],
+["It always seems impossible until it’s done.","Nelson Mandela"],
+["Believe you can and you’re halfway there.","Theodore Roosevelt"]
+];
+const subjects={
+1:["Mathematics","English","Hindi","EVS"],2:["Mathematics","English","Hindi","EVS"],3:["Mathematics","English","Hindi","EVS"],
+4:["Mathematics","English","Hindi","EVS"],5:["Mathematics","English","Hindi","EVS"],
+6:["Mathematics","English","Hindi","Science","Social Science","Sanskrit"],
+7:["Mathematics","English","Hindi","Science","Social Science","Sanskrit"],
+8:["Mathematics","English","Hindi","Science","Social Science","Sanskrit"],
+9:["Mathematics","Science","Social Science","English","Hindi","Computer/IT"],
+10:["Mathematics","Science","Social Science","English","Hindi","Computer/IT"],
+11:["Mathematics","Physics","Chemistry","Biology","English","Computer Science","Accountancy","Business Studies","Economics","History","Geography","Political Science","Psychology","Sociology","Physical Education"],
+12:["Mathematics","Physics","Chemistry","Biology","English","Computer Science","Accountancy","Business Studies","Economics","History","Geography","Political Science","Psychology","Sociology","Physical Education"]
+};
+for(let i=1;i<=12;i++)cls.innerHTML+=`<option value="${i}">Class ${i}</option>`;
+let data=JSON.parse(localStorage.getItem("studyzen")||'{"minutes":0,"tests":0,"questions":0,"correct":0,"studied":0}');
+let studyInt=null,studySec=0,focusInt=null,focusSec=0,qi=0,score=0;
+
+function save(){localStorage.setItem("studyzen",JSON.stringify(data));update()}
+function update(){
+mins.textContent=data.minutes;tests.textContent=data.tests;ques.textContent=data.questions;
+let a=data.questions?Math.round(data.correct/data.questions*100):0;acc.textContent=a+"%";bar.style.width=a+"%";
+}
+function show(id){document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active")}
+function quote(){let q=quotes[Math.floor(Math.random()*quotes.length)];document.getElementById("quote").textContent="“"+q[0]+"”";author.textContent="— "+q[1]}
+function render(){
+let c=cls.value,box=subjectsBox=document.getElementById("subjects");box.innerHTML="";
+subjects[c].forEach(s=>{let d=document.createElement("div");d.className="subject";d.innerHTML="<b>"+s+"</b><br><span class='muted'>Tap to focus on this subject</span>";d.onclick=()=>{focusText.textContent="Focus: "+s+" • Class "+c};box.appendChild(d)});
+testInfo.textContent="Class "+c+" • "+board.value;
+}
+cls.onchange=render;board.onchange=render;
+
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function studyTimer(){
+if(studyInt){clearInterval(studyInt);studyInt=null;timerBtn.textContent="▶ Resume";return}
+timerBtn.textContent="⏸ Pause";studyInt=setInterval(()=>{studySec++;timer.textContent=fmt(studySec);if(studySec%60===0){data.minutes++;save()}},1000)
+}
+function markStudied(){data.studied++;save();alert("Marked as studied! 💪")}
+function focusMode(){show("focus");focusSec=0;focusTimer.textContent="00:00"}
+function focusTimerToggle(){
+if(focusInt){clearInterval(focusInt);focusInt=null;focusBtn.textContent="▶ Resume";return}
+focusBtn.textContent="⏸ Pause";focusInt=setInterval(()=>{focusSec++;focusTimer.textContent=fmt(focusSec);if(focusSec%60===0){data.minutes++;save()}},1000)
+}
+function endFocus(){if(focusInt){clearInterval(focusInt);focusInt=null}show("progress")}
+
+const quizQs=[
+["What is 25% of 80?",["10","20","25","40"],1],
+["Which planet is called the Red Planet?",["Earth","Mars","Jupiter","Venus"],1],
+["What is 7 × 8?",["54","56","64","48"],1],
+["Which gas is used by plants in photosynthesis?",["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],2],
+["What is 12²?",["124","144","132","154"],1]
+];
+function startQuiz(){qi=0;score=0;nextQ()}
+function nextQ(){
+if(qi>=quizQs.length){data.tests++;save();quiz.innerHTML=`<h3>🎉 Complete!</h3><p>Score: <b>${score}/5</b></p><p>Test accuracy: <b>${score*20}%</b></p>`;return}
+let q=quizQs[qi];quiz.innerHTML=`<div class="question"><b>Q${qi+1}. ${q[0]}</b></div>`;
+q[1].forEach((o,i)=>{let b=document.createElement("button");b.className="option";b.textContent=o;b.onclick=()=>{data.questions++;if(i===q[2]){score++;data.correct++;b.classList.add("correct")}else b.classList.add("wrong");save();setTimeout(()=>{qi++;nextQ()},350)};quiz.appendChild(b)})
+}
+
+/* ---------- ADVANCED MATH ENGINE ---------- */
+function normalize(s){return s.toLowerCase().replace(/[×·]/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/π/g,"pi").replace(/\s+/g,"")}
+function formatNum(n){if(Math.abs(n)<1e-10)n=0;return Number.isInteger(n)?String(n):String(Number(n.toFixed(10)))}
+function evalExpr(s){
+  // Safe recursive-descent math parser: NO eval(), Function(), or arbitrary JS execution.
+  const t=normalize(s).replace(/,/g,"");
+  let i=0;
+  const funcs=["sin","cos","tan","sqrt","log","ln","abs"];
+  function skip(){while(i<t.length && t[i]===" ")i++}
+  function number(){
+    skip(); let st=i;
+    while(i<t.length && /[0-9.]/.test(t[i]))i++;
+    if(st===i) throw 0;
+    let n=Number(t.slice(st,i)); if(!Number.isFinite(n))throw 0;
+    return n;
+  }
+  function primary(){
+    skip();
+    if(t[i]==="+"){i++;return primary()}
+    if(t[i]==="-"){i++;return -primary()}
+    if(t[i]==="("){i++;let v=add();if(t[i]!==")")throw 0;i++;return v}
+    for(const f of funcs){
+      if(t.startsWith(f+"(",i)){
+        i+=f.length+1; let v=add(); if(t[i]!==")")throw 0;i++;
+        if(f==="sin")return Math.sin(v*Math.PI/180);
+        if(f==="cos")return Math.cos(v*Math.PI/180);
+        if(f==="tan")return Math.tan(v*Math.PI/180);
+        if(f==="sqrt")return Math.sqrt(v);
+        if(f==="log")return Math.log10(v);
+        if(f==="ln")return Math.log(v);
+        return Math.abs(v);
+      }
+    }
+    if(t.startsWith("pi",i)){i+=2;return Math.PI}
+    return number();
+  }
+  function power(){
+    let a=primary(); skip();
+    if(t[i]==="^"){i++;let b=power();return Math.pow(a,b)}
+    return a;
+  }
+  function mul(){
+    let v=power();
+    while(i<t.length){
+      if(t[i]==="*"){i++;v*=power()}
+      else if(t[i]==="/"){i++;let d=power();if(d===0)throw 0;v/=d}
+      else break;
+    }
+    return v;
+  }
+  function add(){
+    let v=mul();
+    while(i<t.length){
+      if(t[i]==="+"){i++;v+=mul()}
+      else if(t[i]==="-"){i++;v-=mul()}
+      else break;
+    }
+    return v;
+  }
+  let ans=add();
+  if(i!==t.length || !Number.isFinite(ans))throw 0;
+  return ans;
+}
+function solveMath(){
+let raw=document.getElementById("mathInput").value.trim(),s=normalize(raw),out=document.getElementById("mathResult");
+if(!s){out.innerHTML='<div class="result">Enter a math problem first.</div>';return}
+try{
+/* percentage word form */
+let pm=s.match(/^([0-9.]+)%of([0-9.]+)$/);
+if(pm){let a=+pm[1],b=+pm[2],ans=a*b/100;out.innerHTML=`<div class="result"><b>Step 1:</b> ${a}% = ${a}/100<br><b>Step 2:</b> (${a}/100) × ${b}<br><b>Answer:</b> ${formatNum(ans)}</div>`;return}
+
+/* simultaneous: ax+by=c, dx+ey=f */
+let sm=s.match(/^([+-]?\d*\.?\d*)x([+-]\d*\.?\d*)y=([+-]?\d*\.?\d*);([+-]?\d*\.?\d*)x([+-]\d*\.?\d*)y=([+-]?\d*\.?\d*)$/);
+if(sm){
+let A=coef(sm[1],1),B=coef(sm[2],1),C=+sm[3],D=coef(sm[4],1),E=coef(sm[5],1),F=+sm[6],det=A*E-B*D;
+if(det){let x=(C*E-B*F)/det,y=(A*F-C*D)/det;out.innerHTML=`<div class="result"><b>Simultaneous equations</b><br>x = (c·e − b·f)/(a·e − b·d)<br>y = (a·f − c·d)/(a·e − b·d)<br><br><b>x = ${formatNum(x)}</b><br><b>y = ${formatNum(y)}</b></div>`;return}
+}
+
+/* quadratic ax²+bx+c=0 */
+let qm=s.match(/^([+-]?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]?\d*\.?\d*)=0$/);
+if(qm){
+let a=coef(qm[1],1),b=coef(qm[2],0),c=+qm[3],disc=b*b-4*a*c;
+if(disc>=0){let x1=(-b+Math.sqrt(disc))/(2*a),x2=(-b-Math.sqrt(disc))/(2*a);out.innerHTML=`<div class="result"><b>Quadratic formula:</b> x = (−b ± √(b²−4ac))/(2a)<br><b>Discriminant:</b> ${formatNum(disc)}<br><b>x₁ = ${formatNum(x1)}</b><br><b>x₂ = ${formatNum(x2)}</b></div>`;return}
+}
+
+/* linear ax+b=c */
+let lm=s.match(/^([+-]?\d*\.?\d*)x([+-]\d*\.?\d*)=([+-]?\d*\.?\d*)$/);
+if(lm){
+let a=coef(lm[1],1),b=+lm[2],c=+lm[3];
+if(a!==0){let x=(c-b)/a;out.innerHTML=`<div class="result"><b>Step 1:</b> ${formatNum(a)}x + ${formatNum(b)} = ${formatNum(c)}<br><b>Step 2:</b> ${formatNum(a)}x = ${formatNum(c-b)}<br><b>Step 3:</b> divide by ${formatNum(a)}<br><b>Answer: x = ${formatNum(x)}</b></div>`;return}
+}
+
+/* fraction a/b */
+let fm=s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+if(fm){let a=+fm[1],b=+fm[2],ans=a/b;out.innerHTML=`<div class="result"><b>Fraction:</b> ${a}/${b}<br><b>Decimal:</b> ${formatNum(ans)}</div>`;return}
+
+/* general expression */
+let ans=evalExpr(s);
+if(Number.isFinite(ans)){out.innerHTML=`<div class="result"><b>Expression:</b> ${raw}<br><b>Answer:</b> ${formatNum(ans)}<br><br><span class="muted">The expression was evaluated using standard mathematical precedence.</span></div>`;return}
+throw 0;
+}catch(e){out.innerHTML=`<div class="result"><b>Could not solve this format.</b><br>Try examples:<br>• <code>25%of80</code><br>• <code>3x+5=20</code><br>• <code>x^2-5x+6=0</code><br>• <code>sin(30)</code><br>• <code>2*(5+3)^2</code><br>• <code>2x+3y=12; x-y=1</code></div>`}
+}
+function coef(v,def){if(v===""||v==="+")return def;if(v==="-")return -def;return +v}
+function clearMath(){mathInput.value="";mathResult.innerHTML=""}
+function resetData(){if(confirm("Reset all progress?")){data={minutes:0,tests:0,questions:0,correct:0,studied:0};save()}}
+quote();render();update();
+</script>
+</body>
+</html>
