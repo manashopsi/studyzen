@@ -171,6 +171,89 @@ footer{
 }
 </style>
 </head>
+    
+/* =====================================================
+   VIDEO LIBRARY
+===================================================== */
+
+let currentVideoURL = null;
+
+function openVideoLibrary() {
+
+    document.getElementById("content").innerHTML = `
+        <div class="card">
+
+            <button class="back" onclick="closeContent()">
+                ← Back
+            </button>
+
+            <h2>🎥 Video Library</h2>
+
+            <p>Select a study video from your device.</p>
+
+            <input
+                type="file"
+                id="videoUpload"
+                accept="video/*"
+            >
+
+            <p id="videoMessage"></p>
+
+            <div id="videoPlayerArea"></div>
+
+        </div>
+    `;
+
+    document.getElementById("videoUpload")
+        .addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (!file) return;
+
+            if (!file.type.startsWith("video/")) {
+                document.getElementById("videoMessage")
+                    .textContent = "Please select a valid video.";
+                return;
+            }
+
+            if (currentVideoURL) {
+                URL.revokeObjectURL(currentVideoURL);
+            }
+
+            currentVideoURL = URL.createObjectURL(file);
+
+            const player = document.createElement("video");
+            player.controls = true;
+            player.playsInline = true;
+            player.style.width = "100%";
+            player.style.maxHeight = "450px";
+            player.style.background = "#000";
+            player.style.borderRadius = "12px";
+
+            const source = document.createElement("source");
+            source.src = currentVideoURL;
+            source.type = file.type;
+
+            player.appendChild(source);
+
+            const area = document.getElementById("videoPlayerArea");
+            area.replaceChildren();
+
+            const title = document.createElement("h3");
+            title.textContent = file.name;
+
+            area.appendChild(title);
+            area.appendChild(player);
+
+            document.getElementById("videoMessage")
+                .textContent = "✅ Video loaded successfully!";
+
+        });
+
+    scrollToContent();
+}
+
 
 <body>
 
@@ -310,12 +393,12 @@ footer{
                 Choose
             </button>
         </div>
-        <div class="item">
-            <h3>🌍 upload video</h3>
-            <button onclick="selectStream('paths')">
-                Choose
-            </button>
-        </div>
+       <div class="item">
+    <h3>📊 Progress</h3>
+    <button onclick="openProgress()">
+        View
+    </button>
+</div>
         
 
     </div>
